@@ -1,0 +1,39 @@
+import pandas as pd
+import cv2 as cv
+import datetime as dt
+d=dt.datetime.now()
+date=str(d.day)+'-'+str(d.month)+'-'+str(d.year)
+
+k=pd.read_excel("book1.xlsx")
+row=0
+while row<len(k):
+   roll_no=row+1 
+   first_name=k.iloc[row]['First Name']
+   marks=k.iloc[row]['Marks Scored']
+   pc=k.iloc[row]['Average']
+   division=k.iloc[row]['Division']
+   dob=k.iloc[row]['DOB']
+   img=cv.imread("certificate1.png",1)
+   font=cv.FONT_HERSHEY_SIMPLEX
+   font1=cv.FONT_HERSHEY_SCRIPT_SIMPLEX
+   font2=cv.FONT_HERSHEY_TRIPLEX
+   img=cv.putText(img,'CERTIFICATE OF COMPLETION',(184,157),font2,0.5,(255,0,0),1,cv.LINE_AA)
+   img=cv.putText(img,"This is to certify that "+str(first_name)+' of roll ',(83,224),font1,1,(0,0,255),1,cv.LINE_AA)
+   img=cv.putText(img,"no "+str(roll_no)+" has passed the examination ",(83,260),font1,1,(0,0,255),1,cv.LINE_AA)
+   img=cv.putText(img,'and has secured '+str(division)+' division.',(83,296),font1,1,(0,0,255),1,cv.LINE_AA)
+   img=cv.putText(img,"His/Her DOB is "+str(dob)+'.',(83,332),font1,1,(0,0,255),1,cv.LINE_AA)
+   img=cv.putText(img,'Signature',(375,508),font,0.5,(0,0,0),1,cv.LINE_AA)
+   img=cv.putText(img,'--------------',(354,490),font,0.5,(0,0,0),1,cv.LINE_AA)
+   img=cv.putText(img,'Date',(64,418),font,0.5,(0,0,0),1,cv.LINE_AA)
+   img=cv.putText(img,str(date),(64,392),font,0.5,(0,0,0),1,cv.LINE_AA)
+   img=cv.putText(img,'----------',(45,400),font,0.5,(0,0,0),1,cv.LINE_AA)
+   cv.imshow("img",img)
+   cv.imwrite(str(first_name)+"_certificate.jpg",img)
+   cv.waitKey(0)
+   cv.destroyAllWindows()
+   row+=1   
+    
+    
+
+      
+   
